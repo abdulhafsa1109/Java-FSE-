@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Feedback</title>
+</head>
+
+<body>
+
+<h2>Event Feedback</h2>
+
+<label>Phone Number:</label>
+<input type="text" id="phone" onblur="validatePhone()">
+
+<p id="phoneMessage"></p>
+
+<label>Select Event:</label>
+
+<select onchange="showFee(this.value)">
+    <option value="">Select Event</option>
+    <option value="100">Music Event</option>
+    <option value="200">Sports Event</option>
+    <option value="150">Food Festival</option>
+</select>
+
+<p id="fee"></p>
+
+<label>Feedback:</label><br>
+
+<textarea id="feedback"
+          onkeyup="countCharacters()"></textarea>
+
+<p>Characters: <span id="count">0</span></p>
+
+<button onclick="showConfirmation()">
+    Submit
+</button>
+
+<br><br>
+
+<img src="event1.jpg"
+     width="200"
+     ondblclick="enlargeImage(this)"
+     alt="Event">
+
+<script>
+
+    function validatePhone() {
+        let phone = document.getElementById("phone").value;
+
+        if (phone.length == 10) {
+            document.getElementById("phoneMessage").innerHTML =
+                "Valid Phone Number";
+        } else {
+            document.getElementById("phoneMessage").innerHTML =
+                "Enter a 10 digit phone number";
+        }
+    }
+
+    function showFee(fee) {
+        document.getElementById("fee").innerHTML =
+            "Event Fee: ₹" + fee;
+    }
+
+    function countCharacters() {
+        let text = document.getElementById("feedback").value;
+
+        document.getElementById("count").innerHTML =
+            text.length;
+    }
+
+    function showConfirmation() {
+        alert("Feedback Submitted Successfully!");
+    }
+
+    function enlargeImage(image) {
+        image.style.width = "400px";
+    }
+
+</script>
+
+</body>
+</html>
