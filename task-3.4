@@ -1,0 +1,30 @@
+function addEvent(name)
+{
+    console.log(name + " Added");
+}
+
+function registerUser(name)
+{
+    console.log(name + " Registered");
+}
+
+function filterEventsByCategory(category)
+{
+    console.log(category);
+}
+
+function counter()
+{
+    let count = 0;
+
+    return function()
+    {
+        count++;
+        console.log(count);
+    }
+}
+
+let total = counter();
+
+total();
+total();
