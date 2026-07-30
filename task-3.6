@@ -1,0 +1,17 @@
+let events = ["Music","Sports"];
+
+events.push("Dance");
+
+let music = events.filter(function(x)
+{
+    return x=="Music";
+});
+
+console.log(music);
+
+let cards = events.map(function(x)
+{
+    return "Event : " + x;
+});
+
+console.log(cards);
