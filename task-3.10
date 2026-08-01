@@ -1,0 +1,16 @@
+const event = {
+name:"Music",
+date:"10-Aug"
+};
+
+let {name,date} = event;
+
+console.log(name);
+
+console.log(date);
+
+let events = ["Music","Sports"];
+
+let copy = [...events];
+
+console.log(copy);
