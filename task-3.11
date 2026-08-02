@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form onsubmit="save(event)">
+
+<input name="name">
+
+<input name="email">
+
+<input name="event">
+
+<button>Submit</button>
+
+</form>
+
+<p id="msg"></p>
+
+<script>
+
+function save(event)
+{
+event.preventDefault();
+
+document.getElementById("msg").innerHTML="Form Submitted";
+}
+
+</script>
+
+</body>
+</html>
