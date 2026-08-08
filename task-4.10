@@ -1,0 +1,12 @@
+<nav class="navbar navbar-light bg-light">
+<a class="navbar-brand">Logo</a>
+<input class="form-control w-25" placeholder="Search">
+</nav>
+<ul class="nav nav-tabs">
+<li class="nav-item">
+<a class="nav-link active">Home</a>
+</li>
+<li class="nav-item">
+<a class="nav-link">About</a>
+</li>
+</ul>
