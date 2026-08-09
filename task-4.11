@@ -1,0 +1,25 @@
+<div class="card" style="width:200px;">
+
+<img src="img.jpg" class="card-img-top">
+
+<div class="card-body">
+
+<h5 class="card-title">John</h5>
+
+</div>
+
+</div>
+
+<div class="d-flex">
+
+<img src="img.jpg" width="80">
+
+<div class="ms-3">
+
+<h5>Heading</h5>
+
+<p>Content</p>
+
+</div>
+
+</div>
