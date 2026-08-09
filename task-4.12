@@ -1,0 +1,13 @@
+<div class="m-3 p-2 bg-warning">
+
+Bootstrap Box
+
+</div>
+-----------
+<div class="p-5 text-center border">
+
+<h3>Premium Plan</h3>
+
+<p>₹999</p>
+
+</div>
