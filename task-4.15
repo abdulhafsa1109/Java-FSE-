@@ -1,0 +1,11 @@
+<img src="img.jpg"
+
+class="border border-primary border-3 rounded-circle"
+
+width="150">
+.............
+<div class="card shadow-lg rounded-pill p-3">
+
+Bootstrap Card
+
+</div>
