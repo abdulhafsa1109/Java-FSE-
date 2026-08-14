@@ -1,0 +1,34 @@
+-- 6. Event Resource Summary
+SELECT event_id, resource_type, COUNT(*) AS total
+FROM Resources
+GROUP BY event_id, resource_type;
+
+
+-- 7. Low Feedback Alerts
+SELECT u.full_name, f.comments, e.title
+FROM Feedback f
+JOIN Users u ON f.user_id = u.user_id
+JOIN Events e ON f.event_id = e.event_id
+WHERE f.rating < 3;
+
+
+-- 8. Sessions per Upcoming Event
+SELECT e.title, COUNT(s.session_id) AS sessions
+FROM Events e
+LEFT JOIN Sessions s ON e.event_id = s.event_id
+WHERE e.status = 'upcoming'
+GROUP BY e.event_id, e.title;
+
+
+-- 9. Organizer Event Summary
+SELECT organizer_id, status, COUNT(*) AS total_events
+FROM Events
+GROUP BY organizer_id, status;
+
+
+-- 10. Feedback Gap
+SELECT DISTINCT e.title
+FROM Events e
+JOIN Registrations r ON e.event_id = r.event_id
+LEFT JOIN Feedback f ON e.event_id = f.event_id
+WHERE f.feedback_id IS NULL;
