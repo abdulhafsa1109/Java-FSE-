@@ -1,0 +1,21 @@
+import java.io.*;
+import java.util.*;
+
+class FileWrite
+{
+    public static void main(String[] args) throws Exception
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        FileWriter f = new FileWriter("output.txt");
+
+        f.write(text);
+
+        f.close();
+
+        System.out.println("Data written successfully");
+    }
+}
