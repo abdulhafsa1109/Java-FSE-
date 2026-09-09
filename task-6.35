@@ -1,0 +1,25 @@
+import java.net.*;
+import java.io.*;
+
+class Server
+{
+    public static void main(String[] args) throws Exception
+    {
+        ServerSocket server = new ServerSocket(5000);
+
+        System.out.println("Waiting for client...");
+
+        Socket socket = server.accept();
+
+        BufferedReader in =
+            new BufferedReader(
+                new InputStreamReader(socket.getInputStream()));
+
+        String message = in.readLine();
+
+        System.out.println("Client says: " + message);
+
+        socket.close();
+        server.close();
+    }
+}
