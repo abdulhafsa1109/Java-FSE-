@@ -1,0 +1,9 @@
+class Test
+{
+    int number = 10;
+
+    void display()
+    {
+        System.out.println(number);
+    }
+}
