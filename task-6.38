@@ -1,0 +1,16 @@
+
+class Demo
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Hello Java");
+    }
+}
+
+/*
+Compile:
+javac Demo.java
+
+The .class file can be inspected using tools
+such as javap or a Java decompiler.
+*/
