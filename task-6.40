@@ -1,0 +1,14 @@
+class VirtualThreadExample
+{
+    public static void main(String[] args) throws Exception
+    {
+        Thread thread = Thread.startVirtualThread(() ->
+        {
+            System.out.println("Virtual Thread is running");
+        });
+
+        thread.join();
+
+        System.out.println("Main thread completed");
+    }
+}
