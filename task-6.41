@@ -1,0 +1,22 @@
+// 41. ExecutorService and Callable
+
+import java.util.concurrent.*;
+
+class ExecutorExample
+{
+    public static void main(String[] args) throws Exception
+    {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Callable<Integer> task = () ->
+        {
+            return 10 + 20;
+        };
+
+        Future<Integer> result = executor.submit(task);
+
+        System.out.println("Result = " + result.get());
+
+        executor.shutdown();
+    }
+}
