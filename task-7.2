@@ -1,0 +1,8 @@
+-- 2. Top Rated Events
+-- Events having at least 10 feedback submissions
+
+SELECT event_id, AVG(rating) AS average_rating
+FROM Feedback
+GROUP BY event_id
+HAVING COUNT(*) >= 10
+ORDER BY average_rating DESC;
