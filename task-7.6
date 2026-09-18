@@ -1,0 +1,6 @@
+-- 6. Event Resource Summary
+-- Count PDFs, images and links for each event
+
+SELECT event_id, resource_type, COUNT(*) AS total_resources
+FROM Resources
+GROUP BY event_id, resource_type;
