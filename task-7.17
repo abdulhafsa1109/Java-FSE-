@@ -1,0 +1,7 @@
+-- 17. Multi-Session Speakers
+-- Speakers handling more than one session
+
+SELECT speaker_name, COUNT(*) AS total_sessions
+FROM Sessions
+GROUP BY speaker_name
+HAVING COUNT(*) > 1;
