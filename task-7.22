@@ -1,0 +1,9 @@
+-- 22. Duplicate Registrations Check
+-- Find users registered more than once for the same event
+
+SELECT user_id,
+       event_id,
+       COUNT(*) AS total_registrations
+FROM Registrations
+GROUP BY user_id, event_id
+HAVING COUNT(*) > 1;
