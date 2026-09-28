@@ -1,0 +1,234 @@
+OBJECTIVE:
+
+1. Understand branching and merging.
+2. Create a new branch.
+3. Make changes in the branch.
+4. Merge the branch with master.
+5. Understand branch and merge requests in GitLab.
+
+PREREQUISITE:
+
+Git environment with P4Merge installed and configured.
+
+
+--------------------------------------------------
+BRANCHING
+--------------------------------------------------
+
+1. Create a new branch called GitNewBranch
+
+git branch GitNewBranch
+
+
+2. List all local and remote branches
+
+git branch -a
+
+The * symbol shows the current branch.
+
+
+3. Switch to the new branch
+
+git checkout GitNewBranch
+
+OR:
+
+git switch GitNewBranch
+
+
+4. Create a new file
+
+touch newfile.txt
+
+
+5. Add some content
+
+echo "This is my new branch" > newfile.txt
+
+
+6. Check the files
+
+ls
+
+
+7. Check Git status
+
+git status
+
+
+8. Add the file
+
+git add newfile.txt
+
+
+9. Commit the changes
+
+git commit -m "Added changes in GitNewBranch"
+
+
+10. Check status again
+
+git status
+
+
+--------------------------------------------------
+MERGING
+--------------------------------------------------
+
+1. Switch back to master
+
+git checkout master
+
+
+2. List differences between master and GitNewBranch
+
+git diff master GitNewBranch
+
+
+3. View visual differences using P4Merge
+
+git difftool master GitNewBranch
+
+P4Merge will display the visual differences.
+
+
+4. Merge GitNewBranch into master
+
+git merge GitNewBranch
+
+
+5. Check the commit history
+
+git log --oneline --graph --decorate
+
+
+6. Delete the branch after merging
+
+git branch -d GitNewBranch
+
+
+7. Check branches
+
+git branch -a
+
+
+8. Check final status
+
+git status
+
+
+--------------------------------------------------
+IMPORTANT COMMANDS
+--------------------------------------------------
+
+git branch GitNewBranch
+        → Creates a new branch
+
+git branch -a
+        → Lists local and remote branches
+
+git checkout GitNewBranch
+        → Switches to the new branch
+
+git status
+        → Shows current repository status
+
+git add .
+        → Stages changes
+
+git commit -m "message"
+        → Saves changes to the branch
+
+git checkout master
+        → Switches to master
+
+git diff master GitNewBranch
+        → Shows differences between branches
+
+git difftool master GitNewBranch
+        → Shows visual differences using P4Merge
+
+git merge GitNewBranch
+        → Merges the branch into master
+
+git log --oneline --graph --decorate
+        → Shows commit history as a graph
+
+git branch -d GitNewBranch
+        → Deletes the merged branch
+
+
+--------------------------------------------------
+COMPLETE FLOW
+--------------------------------------------------
+
+Create branch
+      ↓
+git branch GitNewBranch
+      ↓
+Switch branch
+      ↓
+git checkout GitNewBranch
+      ↓
+Create/Edit files
+      ↓
+git add .
+      ↓
+git commit
+      ↓
+Switch to master
+      ↓
+git checkout master
+      ↓
+Check differences
+      ↓
+git diff master GitNewBranch
+      ↓
+Merge
+      ↓
+git merge GitNewBranch
+      ↓
+Check history
+      ↓
+git log --oneline --graph --decorate
+      ↓
+Delete branch
+      ↓
+git branch -d GitNewBranch
+      ↓
+git status
+
+
+--------------------------------------------------
+GITLAB BRANCH REQUEST / MERGE REQUEST
+--------------------------------------------------
+
+Branch Request:
+
+Create a branch in GitLab or push your local branch to GitLab.
+
+git push -u origin GitNewBranch
+
+
+Merge Request:
+
+1. Push the branch to GitLab.
+2. Open the GitLab project.
+3. Select Merge Requests.
+4. Create a New Merge Request.
+5. Select:
+   Source branch → GitNewBranch
+   Target branch → master
+6. Add title/description.
+7. Create the Merge Request.
+8. Review the changes.
+9. Merge the request into master.
+
+
+KEY POINT:
+
+Branch = Separate line of development.
+
+Merge = Combine changes from one branch into another.
+
+Master = Main branch used as the target in this lab.
