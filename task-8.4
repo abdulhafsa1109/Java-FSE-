@@ -1,0 +1,339 @@
+OBJECTIVE:
+
+Understand how to resolve conflicts during a Git merge when
+master and a branch contain different changes to the same file.
+
+
+PREREQUISITE:
+
+Complete the previous Git branching and merging lab.
+
+
+--------------------------------------------------
+1. CHECK MASTER STATUS
+--------------------------------------------------
+
+git checkout master
+
+git status
+
+Make sure the working directory is clean.
+
+
+--------------------------------------------------
+2. CREATE GitWork BRANCH
+--------------------------------------------------
+
+git branch GitWork
+
+git checkout GitWork
+
+
+--------------------------------------------------
+3. CREATE hello.xml
+--------------------------------------------------
+
+touch hello.xml
+
+Add some content:
+
+echo "<hello>Branch Version</hello>" > hello.xml
+
+
+--------------------------------------------------
+4. CHECK STATUS
+--------------------------------------------------
+
+git status
+
+
+--------------------------------------------------
+5. COMMIT CHANGES TO GitWork
+--------------------------------------------------
+
+git add hello.xml
+
+git commit -m "Added hello.xml in GitWork"
+
+
+--------------------------------------------------
+6. SWITCH TO MASTER
+--------------------------------------------------
+
+git checkout master
+
+
+--------------------------------------------------
+7. CREATE hello.xml IN MASTER
+--------------------------------------------------
+
+Create the same file with DIFFERENT content:
+
+echo "<hello>Master Version</hello>" > hello.xml
+
+
+--------------------------------------------------
+8. COMMIT MASTER CHANGES
+--------------------------------------------------
+
+git add hello.xml
+
+git commit -m "Added hello.xml in master"
+
+
+--------------------------------------------------
+9. VIEW COMPLETE LOG
+--------------------------------------------------
+
+git log --oneline --graph --decorate --all
+
+
+This shows the different commits on master and GitWork.
+
+
+--------------------------------------------------
+10. CHECK DIFFERENCES
+--------------------------------------------------
+
+git diff master GitWork
+
+
+--------------------------------------------------
+11. USE P4MERGE
+--------------------------------------------------
+
+git difftool master GitWork
+
+P4Merge displays the differences visually.
+
+
+--------------------------------------------------
+12. MERGE GitWork INTO MASTER
+--------------------------------------------------
+
+git checkout master
+
+git merge GitWork
+
+
+A conflict will occur because both master and GitWork
+modified/created hello.xml differently.
+
+
+--------------------------------------------------
+13. CHECK CONFLICT
+--------------------------------------------------
+
+git status
+
+
+Git will show hello.xml as a conflicted file.
+
+
+--------------------------------------------------
+14. OPEN hello.xml
+--------------------------------------------------
+
+The file will contain conflict markers similar to:
+
+<<<<<<< HEAD
+<hello>Master Version</hello>
+=======
+<hello>Branch Version</hello>
+>>>>>>> GitWork
+
+
+Meaning:
+
+<<<<<<< HEAD
+    → Changes from master
+
+=======
+    → Separator
+
+>>>>>>> GitWork
+    → Changes from GitWork
+
+
+--------------------------------------------------
+15. RESOLVE THE CONFLICT
+--------------------------------------------------
+
+Open hello.xml and decide which content should remain.
+
+For example:
+
+<hello>Final Version</hello>
+
+IMPORTANT:
+Remove all conflict markers:
+
+<<<<<<< HEAD
+=======
+>>>>>>> GitWork
+
+
+--------------------------------------------------
+16. ADD THE RESOLVED FILE
+--------------------------------------------------
+
+git add hello.xml
+
+
+--------------------------------------------------
+17. COMMIT THE RESOLUTION
+--------------------------------------------------
+
+git commit -m "Resolved merge conflict"
+
+
+--------------------------------------------------
+18. CHECK STATUS
+--------------------------------------------------
+
+git status
+
+
+The working directory should be clean.
+
+
+--------------------------------------------------
+19. IGNORE BACKUP FILE
+--------------------------------------------------
+
+If a backup file was created during conflict resolution,
+add its pattern to .gitignore.
+
+Example:
+
+echo "*.orig" >> .gitignore
+
+
+Check:
+
+cat .gitignore
+
+
+--------------------------------------------------
+20. COMMIT .gitignore
+--------------------------------------------------
+
+git add .gitignore
+
+git commit -m "Updated gitignore"
+
+
+--------------------------------------------------
+21. LIST ALL BRANCHES
+--------------------------------------------------
+
+git branch -a
+
+
+--------------------------------------------------
+22. DELETE MERGED BRANCH
+--------------------------------------------------
+
+git branch -d GitWork
+
+
+--------------------------------------------------
+23. VIEW FINAL LOG
+--------------------------------------------------
+
+git log --oneline --graph --decorate
+
+
+--------------------------------------------------
+COMPLETE FLOW
+--------------------------------------------------
+
+Check master
+      ↓
+Create GitWork
+      ↓
+Create hello.xml
+      ↓
+Commit branch changes
+      ↓
+Switch to master
+      ↓
+Create hello.xml with different content
+      ↓
+Commit master changes
+      ↓
+View log
+      ↓
+Check differences
+      ↓
+Use P4Merge
+      ↓
+Merge GitWork into master
+      ↓
+CONFLICT
+      ↓
+Open hello.xml
+      ↓
+Remove conflict markers
+      ↓
+Keep desired content
+      ↓
+git add hello.xml
+      ↓
+git commit
+      ↓
+Update .gitignore
+      ↓
+Commit .gitignore
+      ↓
+Delete GitWork
+      ↓
+View final log
+
+
+--------------------------------------------------
+IMPORTANT COMMANDS
+--------------------------------------------------
+
+git status
+    → Check current status
+
+git log --oneline --graph --decorate --all
+    → View complete branch history
+
+git diff master GitWork
+    → Show differences
+
+git difftool master GitWork
+    → Show visual differences using P4Merge
+
+git merge GitWork
+    → Merge branch into master
+
+git add hello.xml
+    → Mark conflict as resolved
+
+git commit
+    → Complete the merge
+
+git branch -a
+    → List all branches
+
+git branch -d GitWork
+    → Delete merged branch
+
+
+KEY POINT:
+
+A merge conflict occurs when Git cannot automatically decide
+which changes to keep.
+
+To resolve it:
+
+1. Open the conflicted file.
+2. Identify the conflict markers.
+3. Keep the required changes.
+4. Remove the conflict markers.
+5. git add <file>
+6. git commit
+7. Check git status.
