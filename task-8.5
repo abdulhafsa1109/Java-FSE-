@@ -1,0 +1,54 @@
+OBJECTIVE:
+
+Clean up the local Git repository and push pending changes
+back to the remote Git repository.
+1. CHECK MASTER STATUS
+git checkout master
+git status
+Make sure the master branch is in a clean state.
+2. LIST ALL BRANCHES
+git branch -a
+3. PULL REMOTE REPOSITORY
+git pull origin master
+This gets the latest changes from the remote repository
+into the local master branch.
+4. PUSH PENDING CHANGES
+git push origin master
+This pushes the pending local changes to the remote
+Git repository.
+5. VERIFY REMOTE REPOSITORY
+Open the GitLab repository in the browser.
+Check whether the latest changes are visible in the
+remote repository.
+COMPLETE FLOW
+Check master status
+       ↓
+git status
+       ↓
+List branches
+       ↓
+git branch -a
+       ↓
+Pull remote changes
+       ↓
+git pull origin master
+       ↓
+Push pending changes
+       ↓
+git push origin master
+       ↓
+Check GitLab
+       ↓
+Verify changes are reflected
+git status
+    → Check repository status
+git branch -a
+    → List local and remote branches
+git pull origin master
+    → Get latest changes from remote
+
+git push origin master
+    → Upload local changes to remote
+KEY POINT:
+PULL  = Remote → Local
+PUSH  = Local → Remote
