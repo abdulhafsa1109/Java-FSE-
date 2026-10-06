@@ -1,0 +1,114 @@
+STEP 1: Create project
+
+npx create-react-app scorecalculatorapp
+
+cd scorecalculatorapp
+
+
+STEP 2: Create folders
+
+src
+ ├── Components
+ │    └── CalculateScore.js
+ │
+ └── Stylesheets
+      └── mystyle.css
+
+
+STEP 3: CalculateScore.js
+
+import "../Stylesheets/mystyle.css";
+
+const percentToDecimal = (decimal) => {
+  return decimal.toFixed(2) + "%";
+};
+
+const calcScore = (total, goal) => {
+  return percentToDecimal((total / goal) * 100);
+};
+
+export const CalculateScore = ({ Name, School, total, goal }) => {
+  return (
+    <div className="formatstyle">
+
+      <h1>Student Details:</h1>
+
+      <div className="Name">
+        <b>Name: </b>
+        <span>{Name}</span>
+      </div>
+
+      <div className="School">
+        <b>School: </b>
+        <span>{School}</span>
+      </div>
+
+      <div className="Total">
+        <b>Total: </b>
+        <span>{total} Marks</span>
+      </div>
+
+      <div className="Score">
+        <b>Score: </b>
+        <span>{calcScore(total, goal)}</span>
+      </div>
+
+    </div>
+  );
+};
+
+
+STEP 4: mystyle.css
+
+.Name {
+  font-weight: 300;
+  color: blue;
+}
+
+.School {
+  color: crimson;
+}
+
+.Total {
+  color: darkmagenta;
+}
+
+.formatstyle {
+  text-align: center;
+  font-size: large;
+}
+
+.Score {
+  color: forestgreen;
+}
+
+
+STEP 5: App.js
+
+import React from "react";
+import { CalculateScore } from "./Components/CalculateScore";
+
+function App() {
+  return (
+    <div>
+      <CalculateScore
+        Name="Steve"
+        School="DNV Public School"
+        total={284}
+        goal={300}
+      />
+    </div>
+  );
+}
+
+export default App;
+
+
+STEP 6: Run
+
+npm start
+
+
+STEP 7: Open
+
+http://localhost:3000
