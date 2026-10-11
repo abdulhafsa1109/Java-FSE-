@@ -1,0 +1,111 @@
+STEP 1: Create:
+
+CohortDetails.module.css
+
+
+STEP 2: CohortDetails.module.css
+
+.box {
+  width: 300px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+dt {
+  font-weight: 500;
+}
+
+
+STEP 3: CohortDetails.js
+
+import React from "react";
+import styles from "./CohortDetails.module.css";
+
+function CohortDetails(props) {
+
+  const statusColor =
+    props.status === "ongoing" ? "green" : "blue";
+
+  return (
+    <div className={styles.box}>
+
+      <h3 style={{ color: statusColor }}>
+        {props.name}
+      </h3>
+
+      <dl>
+
+        <dt>Started On</dt>
+        <dd>{props.startedOn}</dd>
+
+        <dt>Current Status</dt>
+        <dd>{props.status}</dd>
+
+        <dt>Coach</dt>
+        <dd>{props.coach}</dd>
+
+        <dt>Trainer</dt>
+        <dd>{props.trainer}</dd>
+
+      </dl>
+
+    </div>
+  );
+}
+
+export default CohortDetails;
+
+
+STEP 4: App.js
+
+import React from "react";
+import CohortDetails from "./CohortDetails";
+
+function App() {
+  return (
+    <div>
+
+      <h1>Cohorts Details</h1>
+
+      <CohortDetails
+        name="INTADDMDF10 - .NET FSD"
+        startedOn="22-Feb-2022"
+        status="scheduled"
+        coach="Asthma"
+        trainer="Jojo Jose"
+      />
+
+      <CohortDetails
+        name="ADM21F014 - Java FSD"
+        startedOn="10-Sep-2021"
+        status="ongoing"
+        coach="Apoorv"
+        trainer="Elsa Smith"
+      />
+
+      <CohortDetails
+        name="CDBJF21025 - Java FSD"
+        startedOn="24-Dec-2021"
+        status="ongoing"
+        coach="Asthma"
+        trainer="John Doe"
+      />
+
+    </div>
+  );
+}
+
+export default App;
+
+
+STEP 5: Run
+
+npm start
+
+
+STEP 6: Open
+
+http://localhost:3000
