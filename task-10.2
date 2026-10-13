@@ -1,0 +1,19 @@
+Exercise 2: Implementing Dependency Injection
+Update the BookService.java setter method:
+public void setRepository(BookRepository repository) {
+    this.repository = repository;
+}
+
+
+Update applicationContext.xml to inject the repository:
+<bean id="bookRepository" class="com.library.repository.BookRepository"/>
+
+<bean id="bookService" class="com.library.service.BookService">
+    <property name="repository" ref="bookRepository"/>
+</bean>
+
+
+Run LibraryManagementApplication.java.
+Expected output:
+Book Service is working
+Book Repository is working
