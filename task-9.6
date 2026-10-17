@@ -1,10 +1,6 @@
 STEP 1: Create:
-
 CohortDetails.module.css
-
-
 STEP 2: CohortDetails.module.css
-
 .box {
   width: 300px;
   display: inline-block;
@@ -13,31 +9,22 @@ STEP 2: CohortDetails.module.css
   border: 1px solid black;
   border-radius: 10px;
 }
-
 dt {
   font-weight: 500;
 }
 
-
 STEP 3: CohortDetails.js
-
 import React from "react";
 import styles from "./CohortDetails.module.css";
-
 function CohortDetails(props) {
-
   const statusColor =
     props.status === "ongoing" ? "green" : "blue";
-
   return (
     <div className={styles.box}>
-
       <h3 style={{ color: statusColor }}>
         {props.name}
       </h3>
-
       <dl>
-
         <dt>Started On</dt>
         <dd>{props.startedOn}</dd>
 
@@ -51,16 +38,12 @@ function CohortDetails(props) {
         <dd>{props.trainer}</dd>
 
       </dl>
-
     </div>
   );
 }
 
 export default CohortDetails;
-
-
 STEP 4: App.js
-
 import React from "react";
 import CohortDetails from "./CohortDetails";
 
