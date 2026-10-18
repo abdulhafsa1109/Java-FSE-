@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Debugging Example1</title>
 </head>
-
 <body>
-
 <h2 id="heading">Chrome DevTools Example</h2>
 
 <button onclick="calculate()">
