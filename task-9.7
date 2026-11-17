@@ -1,0 +1,136 @@
+
+
+QUESTION:
+
+Scenario:
+The library management system needs a feature to search for books based on the author's name. Implement a custom query method using Spring Data JPA.
+
+Steps:
+1. Create a Spring Boot project named LibraryManagement.
+2. Add Spring Web, Spring Data JPA and H2 Database dependencies.
+3. Create a Book entity with ID, title and author.
+4. Create a BookRepository interface with a method to find books by author.
+5. Create a REST Controller to search books by author.
+6. Run the application and test the endpoint.
+
+ANSWER:
+
+1. Create Book.java
+
+package com.library;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String author;
+
+    public Book() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+}
+
+
+2. Create BookRepository.java
+
+package com.library;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+
+    List<Book> findByAuthor(String author);
+}
+
+
+3. Create BookController.java
+
+package com.library;
+
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+    private final BookRepository repository;
+
+    public BookController(BookRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/author/{name}")
+    public List<Book> getBooksByAuthor(@PathVariable String name) {
+        return repository.findByAuthor(name);
+    }
+}
+
+
+4. Create application.properties
+
+spring.datasource.url=jdbc:h2:mem:librarydb
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.h2.console.enabled=true
+
+
+5. Run the application
+
+mvn spring-boot:run
+
+
+6. Test the endpoint
+
+GET http://localhost:8080/books/author/James
+
+
+EXPECTED OUTPUT:
+
+[
+  {
+    "id": 1,
+    "title": "Java Basics",
+    "author": "James"
+  }
+]
+
+
+RESULT:
+
+Successfully implemented a custom Spring Data JPA query method to search books by author.
+
+IMPORTANT CONCEPT:
+
+findByAuthor() is a derived query method. Spring Data JPA automatically creates the database query based on the method name.
