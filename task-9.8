@@ -1,0 +1,149 @@
+Scenario:
+The library management system contains many books. Implement pagination to display a limited number of books per page and sorting to arrange books based on their title.
+
+Steps:
+1. Create a Spring Boot project named LibraryManagement.
+2. Add Spring Web, Spring Data JPA and H2 Database dependencies.
+3. Create a Book entity.
+4. Create a BookRepository interface.
+5. Create a REST Controller to implement pagination and sorting.
+6. Run the application and test the endpoints.
+
+ANSWER:
+
+1. Create Book.java
+
+package com.library;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String author;
+
+    public Book() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+}
+
+
+2. Create BookRepository.java
+
+package com.library;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+}
+
+
+3. Create BookController.java
+
+package com.library;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+    private final BookRepository repository;
+
+    public BookController(BookRepository repository) {
+        this.repository = repository;
+    }
+
+    // Pagination
+    @GetMapping("/page")
+    public Page<Book> getBooks(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return repository.findAll(pageable);
+    }
+
+    // Sorting
+    @GetMapping("/sort")
+    public Page<Book> sortBooks() {
+
+        Pageable pageable = PageRequest.of(
+                0, 10, Sort.by("title").ascending());
+
+        return repository.findAll(pageable);
+    }
+}
+
+
+4. Create application.properties
+
+spring.datasource.url=jdbc:h2:mem:librarydb
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.h2.console.enabled=true
+
+
+5. Run the application
+
+mvn spring-boot:run
+
+
+6. Test the endpoints
+
+Pagination:
+GET http://localhost:8080/books/page?page=0&size=5
+
+Sorting:
+GET http://localhost:8080/books/sort
+
+
+EXPECTED OUTPUT:
+
+Pagination returns a maximum of 5 books on the first page.
+
+Sorting returns books arranged in ascending order of their titles.
+
+RESULT:
+
+Successfully implemented pagination and sorting using Spring Data JPA.
+
+IMPORTANT CONCEPTS:
+
+1. PageRequest.of(page, size) is used to create pagination requests.
+2. Sort.by("title").ascending() sorts books in ascending order.
+3. repository.findAll(pageable) retrieves records based on pagination and sorting.
